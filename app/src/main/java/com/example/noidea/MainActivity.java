@@ -16,6 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    // bottom navigation tutorial
+    // https://www.geeksforgeeks.org/bottom-navigation-bar-in-android/
+
     reviewsFragment reviews_fragment = new reviewsFragment();
     homeFragment home_fragment = new homeFragment();
 
@@ -40,11 +43,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             }
         });
 
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.home);
-
     }
 
     @Override
@@ -53,12 +54,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.reviews:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, reviews_fragment).commit();
                 return true;
-
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, home_fragment).commit();
                 return true;
-
-
         }
         return false;
 
