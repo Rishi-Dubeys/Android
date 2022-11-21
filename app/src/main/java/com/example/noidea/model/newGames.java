@@ -21,8 +21,6 @@ public class newGames {
     }
 
 
-
-
     public String getUrl() {
         return url;
     }

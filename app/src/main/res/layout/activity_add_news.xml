@@ -3,42 +3,69 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grdnt"
-    >
+    android:gravity="center"
+    android:background="@drawable/grdnt">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="151dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="260dp">
+
+        <Button
+            android:id="@+id/loadImage"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_marginBottom="823dp"
+            android:gravity="center"
+            android:text="Load Image"></Button>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="827dp"
+        android:layout_marginTop="120dp"
         android:gravity="center"
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
+
+
+
+
+
         <LinearLayout
-            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="16dp">
+
                 <EditText
                     android:id="@+id/newName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Game Name"
-                    android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:hint="Game Name"
                     android:inputType="text"
-                    />
+                    android:letterSpacing="0.1"
+                    android:textColorHint="#880808"
+                    android:textSize="16dp" />
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,19 +76,22 @@
                     android:id="@+id/newPlatform"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Game Platform"
-                    android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
-                    android:letterSpacing="0.1"
-                    android:textSize="16dp"
+                    android:hint="Game Platform"
                     android:inputType="text"
-                    />
+                    android:letterSpacing="0.1"
+                    android:textColorHint="#880808"
+                    android:textSize="16dp" />
+
+
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,14 +102,14 @@
                     android:id="@+id/newRelease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Release Date"
-                    android:inputType="date"
-                    android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
+                    android:hint="Release Date"
+                    android:inputType="date"
                     android:letterSpacing="0.1"
-                    android:textSize="16dp"
-                    />
+                    android:textColorHint="#880808"
+                    android:textSize="16dp" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -87,39 +117,52 @@
                 android:layout_height="1dp"
                 android:background="#4a5a71"></LinearLayout>
         </LinearLayout>
+
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="60dp"
-        android:paddingRight="60dp"
-        android:orientation="vertical"
+        android:layout_height="644dp"
+        android:layout_marginTop="100dp"
         android:gravity="bottom"
-        android:layout_marginBottom="20dp">
+        android:orientation="vertical"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp">
+
+
         <TextView
             android:id="@+id/add_game_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="50dp"
             android:background="#000000"
+            android:gravity="center"
+            android:letterSpacing="0.2"
+            android:padding="16dp"
             android:text="Add Game"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_gravity="bottom"
-            android:padding="16dp"
-            android:layout_marginBottom="50dp"
-            android:letterSpacing="0.2"/>
+            android:textStyle="bold" />
+
+
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:layout_marginBottom="400dp">
+        android:layout_height="249dp"
+        android:layout_marginBottom="400dp"
+        android:gravity="center">
+
 
         <ImageView
+            android:id="@+id/press_img"
             android:layout_width="236dp"
-            android:layout_height="235dp">
+            android:layout_height="235dp"></ImageView>
 
-        </ImageView>
     </LinearLayout>
+
+
+
+
 </RelativeLayout>
