@@ -3,5 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_home_fragment">Hello Home fragment</string>
     <string name="hello_reviews_fragment">Hello Reviews fragment</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign up</string>
 
 </resources>

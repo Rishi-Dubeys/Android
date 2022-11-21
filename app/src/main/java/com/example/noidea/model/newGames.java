@@ -1,8 +1,35 @@
 package com.example.noidea.model;
 
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
 public class newGames {
 
-    String name , platform , releaseDate;
+    String name;
+    String platform;
+    String releaseDate;
+    String url;
+    String newsID ;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public newGames() {
+    }
+
+    public String getNewsID() {
+        return newsID;
+    }
+
+    public void setNewsID(String newsID) {
+        this.newsID = newsID;
+    }
 
     public String getName() {
         return name;
@@ -28,7 +55,12 @@ public class newGames {
         this.releaseDate = releaseDate;
     }
 
-    public newGames() {
+    public newGames(String name , String platform , String releaseDate , String url , String newsID) {
+        this.name = name;
+        this.platform= platform;
+        this.releaseDate = releaseDate;
+        this.url = url;
+        this.newsID = newsID;
     }
 
 }

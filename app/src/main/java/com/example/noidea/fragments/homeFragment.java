@@ -1,14 +1,29 @@
 package com.example.noidea.fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.noidea.R;
+import com.example.noidea.model.newGames;
+import com.example.noidea.viewModel.newsGamesView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,10 +72,43 @@ public class homeFragment extends Fragment {
         }
     }
 
+    public List<newGames> newGamesList = new ArrayList<>();
+    RecyclerView recyclerView;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerHome);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        retrieveData();
+
+        return view;
+    }
+
+    private void retrieveData() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    newGames news = dataSnapshot.getValue(newGames.class);
+                    newGamesList.add(news);
+                }
+                newsGamesView adapter = new newsGamesView(getContext(),newGamesList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        dbRef.addValueEventListener(postListener);
     }
 }

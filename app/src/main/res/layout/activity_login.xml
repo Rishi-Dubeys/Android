@@ -31,13 +31,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email Address"
-                    android:textColorHint="#000000"
+                    android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
+                    android:textColorLink="@color/black"
                     android:inputType="text"
-                    android:textColor="#fff"
                     />
             </LinearLayout>
             <LinearLayout
@@ -64,13 +64,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
-                    android:textColorHint="#000000"
+                    android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
                     android:inputType="textPassword"
                     android:letterSpacing="0.1"
                     android:textSize="16dp"
-                    android:textColor="#fff"
                     />
             </LinearLayout>
             <LinearLayout
