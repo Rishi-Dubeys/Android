@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "813132508571",
+    "firebase_url": "https://noidea-d495a-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "noidea-d495a",
+    "storage_bucket": "noidea-d495a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:813132508571:android:c3a1647bc1f72a59a6053e",
+        "android_client_info": {
+          "package_name": "com.example.noidea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "813132508571-38ut6bp5fj8c5k1atu0g6r3tgr7pcvv8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4os4VbuplgAslTyS1Xub5xsQ2pDWevnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "813132508571-38ut6bp5fj8c5k1atu0g6r3tgr7pcvv8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,27 +25,27 @@ public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder
     private LayoutInflater mInflater;
 
 
-    public newsGamesView(Context context , List<newGames> homeList){
+    public newsGamesView(Context context , List<newGames> newGamesList){
         this.mInflater = LayoutInflater.from(context);
-        this.newGamesList = homeList;
+        this.newGamesList = newGamesList;
         this.context = context;
     }
 
     @NonNull
     @Override
     public newsGamesView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View listItem= layoutInflater.inflate(R.layout.item_news, parent, false);
-        ViewHolder viewHolder = new ViewHolder(listItem);
-        return viewHolder;
+        View view= mInflater.inflate(R.layout.item_news, parent, false);
+
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull newsGamesView.ViewHolder holder, int position) {
-
         newGames newGames = newGamesList.get(position);
+
         String gameName = newGames.getName();
         holder.textView.setText(gameName);
+
         String itemUrl = newGames.getUrl();
         Glide.with(context).load(itemUrl).into(holder.imageView);
     }
@@ -56,10 +55,10 @@ public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder
         return newGamesList.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
         public TextView textView;
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.itemImage);
             this.textView = (TextView) itemView.findViewById(R.id.itemName);

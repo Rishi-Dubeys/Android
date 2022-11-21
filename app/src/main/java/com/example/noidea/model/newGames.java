@@ -1,9 +1,4 @@
 package com.example.noidea.model;
-
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
 public class newGames {
 
     String name;

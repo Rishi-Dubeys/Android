@@ -75,7 +75,6 @@ public class homeFragment extends Fragment {
     public List<newGames> newGamesList = new ArrayList<>();
     RecyclerView recyclerView;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,6 +83,7 @@ public class homeFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        newGamesList.clear();
         retrieveData();
 
         return view;
@@ -101,6 +101,7 @@ public class homeFragment extends Fragment {
                 newsGamesView adapter = new newsGamesView(getContext(),newGamesList);
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
             }
 
             @Override
