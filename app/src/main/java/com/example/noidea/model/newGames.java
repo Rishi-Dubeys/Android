@@ -5,7 +5,23 @@ public class newGames {
     String platform;
     String releaseDate;
     String url;
+
+    public void setNewsID(String newsID) {
+        this.newsID = newsID;
+    }
+
     String newsID ;
+
+    public newGames(String name, String platform, String releaseDate, String url, String newsID) {
+        this.name = name;
+        this.platform = platform;
+        this.releaseDate = releaseDate;
+        this.url = url;
+        this.newsID = newsID;
+    }
+
+
+
 
     public String getUrl() {
         return url;
@@ -18,13 +34,6 @@ public class newGames {
     public newGames() {
     }
 
-    public String getNewsID() {
-        return newsID;
-    }
-
-    public void setNewsID(String newsID) {
-        this.newsID = newsID;
-    }
 
     public String getName() {
         return name;
@@ -50,12 +59,6 @@ public class newGames {
         this.releaseDate = releaseDate;
     }
 
-    public newGames(String name , String platform , String releaseDate , String url , String newsID) {
-        this.name = name;
-        this.platform= platform;
-        this.releaseDate = releaseDate;
-        this.url = url;
-        this.newsID = newsID;
-    }
+
 
 }

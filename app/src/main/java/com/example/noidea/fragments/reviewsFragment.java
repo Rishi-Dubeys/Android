@@ -1,5 +1,6 @@
 package com.example.noidea.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.noidea.AddNewsActivity;
+import com.example.noidea.LoginActivity;
+import com.example.noidea.MainActivity;
 import com.example.noidea.R;
 
 /**
@@ -61,6 +66,18 @@ public class reviewsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reviews, container, false);
+        View view = inflater.inflate(R.layout.fragment_reviews, container, false);
+
+
+        Button adminPage = view.findViewById(R.id.adminPage);
+        adminPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), AddNewsActivity.class));
+            }
+        });
+
+
+        return view;
     }
 }
