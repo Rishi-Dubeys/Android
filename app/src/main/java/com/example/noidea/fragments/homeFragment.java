@@ -150,6 +150,10 @@ public class homeFragment extends Fragment {
     }
 
 
+    // Soft Keyboard to stop move layout view
+    // https://stackoverflow.com/questions/43115510/hiding-bottom-navigation-bar-whilst-keyboard-is-present-android
+    // Search Bar Tutorial
+    // https://www.youtube.com/watch?v=alJnPh4IZNo
     public void search(String s){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
 
@@ -168,10 +172,7 @@ public class homeFragment extends Fragment {
                 // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
-
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
