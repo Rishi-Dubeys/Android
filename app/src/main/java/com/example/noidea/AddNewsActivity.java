@@ -2,35 +2,40 @@ package com.example.noidea;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.noidea.model.newGames;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
 import java.io.ByteArrayOutputStream;
 
 
 public class AddNewsActivity extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 200;
-    EditText name,platform,date;
+    EditText name, platform, date;
     ImageView imageView;
-
+    Uri imageUri;
 
 
     @Override
@@ -44,16 +49,14 @@ public class AddNewsActivity extends AppCompatActivity {
         imageView = findViewById(R.id.press_img);
 
 
-
         TextView add_games_btn = findViewById(R.id.add_game_btn);
         add_games_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                writeFirebase();
+                upload_image();
             }
         });
 
-        Button loadImage = findViewById(R.id.loadImage);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,29 +65,8 @@ public class AddNewsActivity extends AppCompatActivity {
             }
         });
 
-        loadImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadImage();
-            }
-        });
     }
 
-    private void writeFirebase() {
-        String str_name = name.getText().toString().trim();
-        String str_platform = platform.getText().toString().trim();
-        String str_date = date.getText().toString().trim();
-
-
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
-        String key = mDatabase.child("News").push().getKey();
-
-        String url = "dsfkjosj";
-
-        newGames newGame = new newGames(str_name,str_platform,str_date,url, key );
-        mDatabase.child(key).setValue(newGame);
-
-    }
 
     void imageChooser() {
         Intent i = new Intent();
@@ -94,42 +76,51 @@ public class AddNewsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE){
-            Uri imageUri = data.getData();
+        if (resultCode == RESULT_OK && requestCode == SELECT_PICTURE) {
+            imageUri = data.getData();
             imageView.setImageURI(imageUri);
         }
     }
 
-    void uploadImage(){
 
-        FirebaseStorage storage = FirebaseStorage.getInstance();
+    private void writeFirebase(String key , String url) {
 
-        StorageReference storageRef = storage.getReference().child("News");
+        String str_name = name.getText().toString().trim();
+        String str_platform = platform.getText().toString().trim();
+        String str_date = date.getText().toString().trim();
 
-        imageView.setDrawingCacheEnabled(true);
-        imageView.buildDrawingCache();
-        Bitmap bitmap = ((BitmapDrawable) imageView.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
 
-        UploadTask uploadTask = storageRef.putBytes(data);
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-            }
-        });
+        newGames newGame = new newGames(str_name, str_platform, str_date, key ,url);
+        mDatabase.child(key).setValue(newGame);
     }
 
+    public void upload_image() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
+        String key = mDatabase.child("News").push().getKey();
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        if (imageUri != null) {
+            StorageReference storageRef = storage.getReference().child("News").child(key);
 
+            storageRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String url = uri.toString();
+                            System.out.println(url);
+                            // adding url to Realtime Database
+                            writeFirebase(key,url);
+                            startActivity(new Intent(AddNewsActivity.this,RegisterActivity.class));
 
+                        }
+                    });
+                }
+            });
+        }
+    }
 }

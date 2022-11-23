@@ -4,22 +4,6 @@ public class newGames {
     String name;
     String platform;
     String releaseDate;
-    String url;
-
-    public void setNewsID(String newsID) {
-        this.newsID = newsID;
-    }
-
-    String newsID ;
-
-    public newGames(String name, String platform, String releaseDate, String url, String newsID) {
-        this.name = name;
-        this.platform = platform;
-        this.releaseDate = releaseDate;
-        this.url = url;
-        this.newsID = newsID;
-    }
-
 
     public String getUrl() {
         return url;
@@ -28,6 +12,30 @@ public class newGames {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public String getNewsID() {
+        return newsID;
+    }
+
+    String url;
+    String newsID ;
+
+
+    public void setNewsID(String newsID) {
+        this.newsID = newsID;
+    }
+
+
+    public newGames(String name, String platform, String releaseDate, String newsID , String url) {
+        this.name = name;
+        this.platform = platform;
+        this.releaseDate = releaseDate;
+        this.newsID = newsID;
+        this.url = url;
+    }
+
+
+
 
     public newGames() {
     }
