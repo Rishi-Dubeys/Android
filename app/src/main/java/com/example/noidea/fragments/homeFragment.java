@@ -81,24 +81,30 @@ public class homeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Assign recycler view with a linear layout
         recyclerView = view.findViewById(R.id.recyclerHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        // Clear List after changing page (Creates the same list everytime the page is created)
         newGamesList.clear();
+        // Call the function to retrieve the data
         retrieveData();
-
         return view;
     }
 
     private void retrieveData() {
+        // Initialize Firebase Database Connection
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    // Use model to retrieve the data from Firebase Database
                     newGames news = dataSnapshot.getValue(newGames.class);
                     newGamesList.add(news);
                 }
+                // Assigning the View Adapter/Model to retrieve the list populated above
                 newsGamesView adapter = new newsGamesView(getContext(),newGamesList);
+                // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
