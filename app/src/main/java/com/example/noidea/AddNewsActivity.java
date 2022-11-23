@@ -18,6 +18,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 
+
 public class AddNewsActivity extends AppCompatActivity {
 
     private static final int SELECT_PICTURE = 200;
