@@ -16,10 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.SearchView;
 
 import com.example.noidea.R;
-import com.example.noidea.model.newGames;
+import com.example.noidea.model.Games;
 import com.example.noidea.viewModel.newsGamesView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -78,7 +77,7 @@ public class homeFragment extends Fragment {
         }
     }
 
-    public List<newGames> newGamesList = new ArrayList<>();
+    public List<Games> newGamesList = new ArrayList<>();
     RecyclerView recyclerView;
 
     @Override
@@ -129,7 +128,7 @@ public class homeFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     // Use model to retrieve the data from Firebase Database
-                    newGames news = dataSnapshot.getValue(newGames.class);
+                    Games news = dataSnapshot.getValue(Games.class);
                     newGamesList.add(news);
                 }
                 // Assigning the View Adapter/Model to retrieve the list populated above
@@ -164,8 +163,8 @@ public class homeFragment extends Fragment {
                 if (snapshot.hasChildren()){
                     newGamesList.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        final newGames newGames = dataSnapshot.getValue(newGames.class);
-                        newGamesList.add(newGames);
+                        final Games games = dataSnapshot.getValue(Games.class);
+                        newGamesList.add(games);
                     }
                 }
                 newsGamesView adapter = new newsGamesView(getContext(),newGamesList);

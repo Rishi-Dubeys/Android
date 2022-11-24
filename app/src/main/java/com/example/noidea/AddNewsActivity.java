@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.example.noidea.model.newGames;
+
+import com.example.noidea.model.Games;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -74,7 +75,7 @@ public class AddNewsActivity extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
 
         // Adding Data to Firebase using the model
-        newGames newGame = new newGames(str_name, str_platform, str_date, key ,url);
+        Games newGame = new Games(str_name, str_platform, str_date, key ,url);
         mDatabase.child(key).setValue(newGame);
     }
 

@@ -1,31 +1,27 @@
 package com.example.noidea.viewModel;
-
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.noidea.R;
-import com.example.noidea.model.newGames;
+import com.example.noidea.model.Games;
 
 import java.util.List;
 
 public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder> {
 
 
-    public List<newGames> newGamesList;
+    public List<Games> newGamesList;
     Context context;
     private LayoutInflater mInflater;
 
 
-    public newsGamesView(Context context , List<newGames> newGamesList){
+    public newsGamesView(Context context , List<Games> newGamesList){
         this.mInflater = LayoutInflater.from(context);
         this.newGamesList = newGamesList;
         this.context = context;
@@ -41,7 +37,7 @@ public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull newsGamesView.ViewHolder holder, int position) {
-        newGames newGames = newGamesList.get(position);
+        Games newGames = newGamesList.get(position);
 
         String gameName = newGames.getName();
         holder.textView.setText(gameName);
