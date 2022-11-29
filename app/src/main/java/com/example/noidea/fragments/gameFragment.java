@@ -4,27 +4,24 @@ import static android.content.ContentValues.TAG;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.example.noidea.R;
+import com.example.noidea.model.Games;
 import com.example.noidea.model.newGames;
+import com.example.noidea.viewModel.GamesView;
 import com.example.noidea.viewModel.newGamesView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,10 +29,10 @@ import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link homeFragment#newInstance} factory method to
+ * Use the {@link gameFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class homeFragment extends Fragment {
+public class gameFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,7 +43,7 @@ public class homeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public homeFragment() {
+    public gameFragment() {
         // Required empty public constructor
     }
 
@@ -56,11 +53,11 @@ public class homeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment homeFragment.
+     * @return A new instance of fragment gameFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static homeFragment newInstance(String param1, String param2) {
-        homeFragment fragment = new homeFragment();
+    public static gameFragment newInstance(String param1, String param2) {
+        gameFragment fragment = new gameFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,62 +74,39 @@ public class homeFragment extends Fragment {
         }
     }
 
-    public List<newGames> NewGamesList = new ArrayList<>();
+
     RecyclerView recyclerView;
+    public List<Games> GamesList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        EditText searchbar = view.findViewById(R.id.search_bar);
-        searchbar.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                if (!editable.toString().isEmpty()){
-                    search(editable.toString());
-                }
-                else {
-                    search("");
-                }
-
-            }
-        });
+        View view = inflater.inflate(R.layout.fragment_game, container, false);
 
         // Assign recycler view with a linear layout
-        recyclerView = view.findViewById(R.id.recyclerHome);
+        recyclerView = view.findViewById(R.id.recyclerGames);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Clear List after changing page (Creates the same list everytime the page is created)
-        NewGamesList.clear();
+        GamesList.clear();
         // Call the function to retrieve the data
-        retrieveData();
+
+        RetrieveData();
         return view;
     }
 
-    private void retrieveData() {
-        // Initialize Firebase Database Connection
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
+    private void RetrieveData() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Games");
         ValueEventListener postListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     // Use model to retrieve the data from Firebase Database
-                    newGames news = dataSnapshot.getValue(newGames.class);
-                    NewGamesList.add(news);
+                    Games games = dataSnapshot.getValue(Games.class);
+                    GamesList.add(games);
                 }
                 // Assigning the View Adapter/Model to retrieve the list populated above
-                newGamesView adapter = new newGamesView(getContext(), NewGamesList);
+                GamesView adapter = new GamesView(getContext(), GamesList);
                 // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -147,40 +121,6 @@ public class homeFragment extends Fragment {
         };
         dbRef.addValueEventListener(postListener);
     }
-
-
-    // Soft Keyboard to stop move layout view
-    // https://stackoverflow.com/questions/43115510/hiding-bottom-navigation-bar-whilst-keyboard-is-present-android
-    // Search Bar Tutorial
-    // https://www.youtube.com/watch?v=alJnPh4IZNo
-    public void search(String s){
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
-
-        Query query = dbRef.orderByChild("name").startAt(s).endAt(s + "u\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.hasChildren()){
-                    NewGamesList.clear();
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        final newGames newGames = dataSnapshot.getValue(newGames.class);
-                        NewGamesList.add(newGames);
-                    }
-                }
-                newGamesView adapter = new newGamesView(getContext(), NewGamesList);
-                // setting the adapter to the recycler view
-                recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-
 
 
 }

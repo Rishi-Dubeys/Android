@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -121,7 +120,9 @@ public class AddNewsActivity extends AppCompatActivity implements DatePickerDial
 
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        // Printing the date selected on the date Picker
         int mMonth = month + 1;
-        date.setText(day + "/" + mMonth + '/' + year);
+        String release_date = day + "/" + mMonth + '/' + year;
+        date.setText(release_date);
     }
 }

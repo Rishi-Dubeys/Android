@@ -16,14 +16,14 @@ import java.util.List;
 public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> {
 
 
-    public List<newGames> newNewGamesList;
+    public List<newGames> newGamesList;
     Context context;
     private final LayoutInflater mInflater;
 
 
-    public newGamesView(Context context , List<newGames> newNewGamesList){
+    public newGamesView(Context context , List<newGames> newGamesList){
         this.mInflater = LayoutInflater.from(context);
-        this.newNewGamesList = newNewGamesList;
+        this.newGamesList = newGamesList;
         this.context = context;
     }
 
@@ -31,13 +31,12 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
     @Override
     public newGamesView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= mInflater.inflate(R.layout.item_news, parent, false);
-
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull newGamesView.ViewHolder holder, int position) {
-        newGames newGames = newNewGamesList.get(position);
+        newGames newGames = newGamesList.get(position);
 
         String gameName = newGames.getName();
         holder.name.setText(gameName);
@@ -51,7 +50,7 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return newNewGamesList.size();
+        return newGamesList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +62,6 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
             this.imageView = (ImageView) itemView.findViewById(R.id.itemImage);
             this.name = (TextView) itemView.findViewById(R.id.itemName);
             this.date = (TextView) itemView.findViewById(R.id.itemDate);
-
         }
     }
 }

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.noidea.fragments.gameFragment;
 import com.example.noidea.fragments.homeFragment;
 import com.example.noidea.fragments.reviewsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     reviewsFragment reviews_fragment = new reviewsFragment();
     homeFragment home_fragment = new homeFragment();
+    gameFragment game_fragment = new gameFragment();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +49,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, home_fragment).commit();
+                return true;
+            case R.id.reviews_list:
+                getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, game_fragment).commit();
                 return true;
         }
         return false;
