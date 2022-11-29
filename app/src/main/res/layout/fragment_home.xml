@@ -7,31 +7,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.homeFragment">
+
     <EditText
         android:id="@+id/search_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="100dp"
+        android:autofillHints=""
         android:drawableStart="@drawable/ic_baseline_search_24"
         android:drawablePadding="5dp"
         android:drawableTint="@color/purple_200"
+        android:hint="@string/search_by_name"
+        android:inputType="text"
         android:minHeight="48dp"
         android:singleLine="true"
+        android:textColorHint="#757575"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:inputType="text"
-        android:hint="@string/search_by_name"
-        android:autofillHints="">
-    </EditText>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerHome"
         android:layout_width="match_parent"
-        android:layout_height="842dp"
+        android:layout_height="550dp"
         android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingBottom="10dp"
+        android:scrollbars="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

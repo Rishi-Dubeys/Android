@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.noidea.AddNewsActivity;
-import com.example.noidea.LoginActivity;
-import com.example.noidea.MainActivity;
 import com.example.noidea.R;
 
 /**
@@ -70,12 +68,7 @@ public class reviewsFragment extends Fragment {
 
 
         Button adminPage = view.findViewById(R.id.adminPage);
-        adminPage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getContext(), AddNewsActivity.class));
-            }
-        });
+        adminPage.setOnClickListener(view1 -> startActivity(new Intent(getContext(), AddNewsActivity.class)));
 
 
         return view;

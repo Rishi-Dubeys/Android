@@ -1,5 +1,5 @@
 package com.example.noidea.model;
-public class Games {
+public class newGames {
 
     String name;
     String platform;
@@ -24,7 +24,7 @@ public class Games {
         this.newsID = newsID;
     }
 
-    public Games(String name, String platform, String releaseDate, String newsID , String url) {
+    public newGames(String name, String platform, String releaseDate, String newsID , String url) {
         this.name = name;
         this.platform = platform;
         this.releaseDate = releaseDate;
@@ -35,7 +35,7 @@ public class Games {
 
 
 
-    public Games() {
+    public newGames() {
     }
 
 

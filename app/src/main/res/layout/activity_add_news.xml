@@ -18,7 +18,7 @@
             android:layout_height="41dp"
             android:layout_marginBottom="823dp"
             android:gravity="center"
-            android:text="Load Image"></Button>
+            android:text="@string/load_image" />
 
     </LinearLayout>
 
@@ -51,20 +51,21 @@
                     android:id="@+id/newName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:background="#00000000"
-                    android:hint="Game Name"
+                    android:hint="@string/game_name"
                     android:inputType="text"
                     android:letterSpacing="0.1"
                     android:textColorHint="#880808"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    android:autofillHints="Game Name" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
+                android:background="#4a5a71" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -76,21 +77,19 @@
                     android:id="@+id/newPlatform"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:background="#00000000"
-                    android:hint="Game Platform"
+                    android:hint="@string/game_platform"
                     android:inputType="text"
                     android:letterSpacing="0.1"
                     android:textColorHint="#880808"
-                    android:textSize="16dp" />
-
-
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
+                android:background="#4a5a71" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,20 +101,22 @@
                     android:id="@+id/newRelease"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginStart="15dp"
                     android:background="#00000000"
-                    android:hint="Release Date"
+                    android:hint="@string/release_date"
                     android:inputType="date"
+                    android:focusable="false"
                     android:letterSpacing="0.1"
                     android:textColorHint="#880808"
-                    android:textSize="16dp" />
+                    android:textSize="16sp"
+                    android:importantForAutofill="no" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4a5a71"></LinearLayout>
+                android:background="#4a5a71" />
         </LinearLayout>
 
 
@@ -141,11 +142,9 @@
             android:gravity="center"
             android:letterSpacing="0.2"
             android:padding="16dp"
-            android:text="Add Game"
+            android:text="@string/add_game"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -158,8 +157,8 @@
         <ImageView
             android:id="@+id/press_img"
             android:layout_width="236dp"
-            android:layout_height="235dp"></ImageView>
-
+            android:layout_height="235dp"
+            android:contentDescription="@string/game_thumbnail" />
     </LinearLayout>
 
 

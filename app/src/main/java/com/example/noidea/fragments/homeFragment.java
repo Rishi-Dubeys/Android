@@ -18,8 +18,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.noidea.R;
-import com.example.noidea.model.Games;
-import com.example.noidea.viewModel.newsGamesView;
+import com.example.noidea.model.newGames;
+import com.example.noidea.viewModel.newGamesView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -77,7 +77,7 @@ public class homeFragment extends Fragment {
         }
     }
 
-    public List<Games> newGamesList = new ArrayList<>();
+    public List<newGames> newNewGamesList = new ArrayList<>();
     RecyclerView recyclerView;
 
     @Override
@@ -114,7 +114,7 @@ public class homeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.recyclerHome);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         // Clear List after changing page (Creates the same list everytime the page is created)
-        newGamesList.clear();
+        newNewGamesList.clear();
         // Call the function to retrieve the data
         retrieveData();
         return view;
@@ -128,11 +128,11 @@ public class homeFragment extends Fragment {
             public void onDataChange(DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     // Use model to retrieve the data from Firebase Database
-                    Games news = dataSnapshot.getValue(Games.class);
-                    newGamesList.add(news);
+                    newGames news = dataSnapshot.getValue(newGames.class);
+                    newNewGamesList.add(news);
                 }
                 // Assigning the View Adapter/Model to retrieve the list populated above
-                newsGamesView adapter = new newsGamesView(getContext(),newGamesList);
+                newGamesView adapter = new newGamesView(getContext(), newNewGamesList);
                 // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -161,13 +161,13 @@ public class homeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()){
-                    newGamesList.clear();
+                    newNewGamesList.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                        final Games games = dataSnapshot.getValue(Games.class);
-                        newGamesList.add(games);
+                        final newGames newGames = dataSnapshot.getValue(newGames.class);
+                        newNewGamesList.add(newGames);
                     }
                 }
-                newsGamesView adapter = new newsGamesView(getContext(),newGamesList);
+                newGamesView adapter = new newGamesView(getContext(), newNewGamesList);
                 // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

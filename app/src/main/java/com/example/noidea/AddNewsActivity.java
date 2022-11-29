@@ -1,26 +1,26 @@
 package com.example.noidea;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.noidea.model.Games;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
+import com.example.noidea.model.newGames;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 
 
-public class AddNewsActivity extends AppCompatActivity {
+public class AddNewsActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     private static final int SELECT_PICTURE = 200;
     EditText name, platform, date;
@@ -36,6 +36,14 @@ public class AddNewsActivity extends AppCompatActivity {
         name = findViewById(R.id.newName);
         platform = findViewById(R.id.newPlatform);
         date = findViewById(R.id.newRelease);
+
+        // Date Picker Code
+        // https://stackoverflow.com/a/14933504/15880071
+
+        date.setOnClickListener(view -> {
+            DatePickerDialog dialog = new DatePickerDialog(this,this, 2023, 0, 1);
+            dialog.show();
+        });
 
 
         TextView add_games_btn = findViewById(R.id.add_game_btn);
@@ -75,7 +83,7 @@ public class AddNewsActivity extends AppCompatActivity {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("News");
 
         // Adding Data to Firebase using the model
-        Games newGame = new Games(str_name, str_platform, str_date, key ,url);
+        newGames newGame = new newGames(str_name, str_platform, str_date, key ,url);
         mDatabase.child(key).setValue(newGame);
     }
 
@@ -93,26 +101,27 @@ public class AddNewsActivity extends AppCompatActivity {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         if (imageUri != null) {
             // Adding image to Firebase Storage
+            assert key != null;
             StorageReference storageRef = storage.getReference().child("News").child(key);
-            storageRef.putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                    // Getting url from image upload
-                    storageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
+            storageRef.putFile(imageUri).addOnCompleteListener(task -> {
+                // Getting url from image upload
+                storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                            // inserting url into Firebase Database
-                            String url = uri.toString();
-                            System.out.println(url);
-                            writeFirebase(key,url);
+                    // inserting url into Firebase Database
+                    String url = uri.toString();
+                    System.out.println(url);
+                    writeFirebase(key,url);
 
-                            // Changing activity after upload
-                            startActivity(new Intent(AddNewsActivity.this,RegisterActivity.class));
-                        }
-                    });
-                }
+                    // Changing activity after upload
+                    startActivity(new Intent(AddNewsActivity.this,RegisterActivity.class));
+                });
             });
         }
+    }
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        int mMonth = month + 1;
+        date.setText(day + "/" + mMonth + '/' + year);
     }
 }

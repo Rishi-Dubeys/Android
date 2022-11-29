@@ -9,38 +9,41 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.noidea.R;
-import com.example.noidea.model.Games;
+import com.example.noidea.model.newGames;
 
 import java.util.List;
 
-public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder> {
+public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> {
 
 
-    public List<Games> newGamesList;
+    public List<newGames> newNewGamesList;
     Context context;
-    private LayoutInflater mInflater;
+    private final LayoutInflater mInflater;
 
 
-    public newsGamesView(Context context , List<Games> newGamesList){
+    public newGamesView(Context context , List<newGames> newNewGamesList){
         this.mInflater = LayoutInflater.from(context);
-        this.newGamesList = newGamesList;
+        this.newNewGamesList = newNewGamesList;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public newsGamesView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public newGamesView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= mInflater.inflate(R.layout.item_news, parent, false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull newsGamesView.ViewHolder holder, int position) {
-        Games newGames = newGamesList.get(position);
+    public void onBindViewHolder(@NonNull newGamesView.ViewHolder holder, int position) {
+        newGames newGames = newNewGamesList.get(position);
 
         String gameName = newGames.getName();
-        holder.textView.setText(gameName);
+        holder.name.setText(gameName);
+
+        String gameDate = newGames.getReleaseDate();
+        holder.date.setText(gameDate);
 
         String itemUrl = newGames.getUrl();
         Glide.with(context).load(itemUrl).into(holder.imageView);
@@ -48,16 +51,19 @@ public class newsGamesView extends RecyclerView.Adapter<newsGamesView.ViewHolder
 
     @Override
     public int getItemCount() {
-        return newGamesList.size();
+        return newNewGamesList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView textView;
+        public TextView name;
+        public TextView date;
         ViewHolder(View itemView) {
             super(itemView);
             this.imageView = (ImageView) itemView.findViewById(R.id.itemImage);
-            this.textView = (TextView) itemView.findViewById(R.id.itemName);
+            this.name = (TextView) itemView.findViewById(R.id.itemName);
+            this.date = (TextView) itemView.findViewById(R.id.itemDate);
+
         }
     }
 }

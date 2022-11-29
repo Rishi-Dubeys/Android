@@ -6,5 +6,13 @@
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign up</string>
     <string name="search_by_name">Search by Name</string>
+    <string name="game_name">Game Name</string>
+    <string name="game_image">Game_Image</string>
+    <string name="date">Date</string>
+    <string name="release_date">Release Date:</string>
+    <string name="load_image">Load Image</string>
+    <string name="game_platform">Game Platform</string>
+    <string name="game_thumbnail">Game Thumbnail</string>
+    <string name="add_game">Add Game</string>
 
 </resources>
