@@ -15,9 +15,7 @@ import android.view.ViewGroup;
 
 import com.example.noidea.R;
 import com.example.noidea.model.Games;
-import com.example.noidea.model.newGames;
 import com.example.noidea.viewModel.GamesView;
-import com.example.noidea.viewModel.newGamesView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -112,7 +110,6 @@ public class gameFragment extends Fragment {
                 adapter.notifyDataSetChanged();
 
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Getting Post failed, log a message
@@ -121,6 +118,5 @@ public class gameFragment extends Fragment {
         };
         dbRef.addValueEventListener(postListener);
     }
-
 
 }

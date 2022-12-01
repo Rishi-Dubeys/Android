@@ -9,22 +9,24 @@ public class Games {
     String publisher;
     String Description;
     String url;
+    String game_id;
 
-    public String getName() {
-        return name;
+
+    public String getGame_id() {
+        return game_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setGame_id(String game_id) {
+        this.game_id = game_id;
     }
 
-    public String getUrl() {
-        return url;
-    }
+    public String getName() { return name; }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+    public void setName(String name) { this.name = name; }
+
+    public String getUrl() { return url; }
+
+    public void setUrl(String url) { this.url = url; }
 
     public String getPlatform() {
         return platform;

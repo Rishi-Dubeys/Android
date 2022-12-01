@@ -1,6 +1,7 @@
 package com.example.noidea.viewModel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.noidea.LoginActivity;
 import com.example.noidea.R;
+import com.example.noidea.gameDetailsActivity;
 import com.example.noidea.model.Games;
 import java.util.List;
 
@@ -49,7 +52,10 @@ public class GamesView extends RecyclerView.Adapter<GamesView.ViewHolder> {
         Glide.with(context).load(itemUrl).into(holder.imageView);
 
         holder.itemView.setOnClickListener(view -> {
-            
+            Intent intent = new Intent(context, gameDetailsActivity.class);
+            intent.putExtra("id",GamesList.get(position).getGame_id());
+            intent.putExtra("name",GamesList.get(position).getName());
+            context.startActivity(intent);
         });
 
 
@@ -67,9 +73,9 @@ public class GamesView extends RecyclerView.Adapter<GamesView.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.imageView = (ImageView) itemView.findViewById(R.id.itemGameImage);
-            this.name = (TextView) itemView.findViewById(R.id.itemGameName);
-            this.date = (TextView) itemView.findViewById(R.id.itemGameDate);
+            this.imageView = itemView.findViewById(R.id.itemGameImage);
+            this.name = itemView.findViewById(R.id.itemGameName);
+            this.date = itemView.findViewById(R.id.itemGameDate);
 
         }
     }
