@@ -20,5 +20,10 @@
     <string name="platform">Platform :</string>
     <string name="release_date2">Release Date :</string>
     <string name="publisher">Publisher :</string>
+    <string name="logo">logo</string>
+    <string name="name">Name :</string>
+    <string name="email">Email :</string>
+    <string name="address">Address :</string>
+    <string name="sign_out">Sign Out</string>
 
 </resources>

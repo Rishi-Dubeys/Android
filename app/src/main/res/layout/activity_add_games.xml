@@ -12,7 +12,7 @@
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -23,7 +23,7 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
                 <EditText
-                    android:id="@+id/mail"
+                    android:id="@+id/nameGames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Game Name"
@@ -46,7 +46,7 @@
                 android:padding="16dp">
 
                 <EditText
-                    android:id="@+id/usrusr"
+                    android:id="@+id/platformGames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Game Platform"
@@ -68,7 +68,7 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
                 <EditText
-                    android:id="@+id/pswrdd"
+                    android:id="@+id/releaseGames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Release Date"
@@ -90,10 +90,10 @@
                 android:padding="16dp">
 
                 <EditText
-                    android:id="@+id/mobphone"
+                    android:id="@+id/publisherGames"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Description"
+                    android:hint="Publisher"
                     android:textColorHint="#880808"
                     android:layout_marginLeft="15dp"
                     android:background="#00000000"
@@ -101,6 +101,32 @@
                     android:textSize="16dp"
                     />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#4a5a71"></LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <EditText
+                    android:id="@+id/descGames"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Description"
+                    android:lines="4"
+                    android:maxLines="20"
+                    android:textColorHint="#880808"
+                    android:layout_marginLeft="15dp"
+                    android:background="#00000000"
+                    android:letterSpacing="0.1"
+                    android:textSize="16dp"
+                    />
+            </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -113,10 +139,9 @@
         android:paddingLeft="60dp"
         android:paddingRight="60dp"
         android:orientation="vertical"
-        android:gravity="bottom"
-        android:layout_marginBottom="20dp">
+        android:gravity="bottom">
         <TextView
-            android:id="@+id/sup"
+            android:id="@+id/addGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#000000"
@@ -133,11 +158,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:layout_marginBottom="400dp">
+        android:layout_marginBottom="550dp">
 
         <ImageView
+            android:id="@+id/gameImages"
             android:layout_width="236dp"
             android:layout_height="235dp"
            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="151dp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="200dp">
+
+        <Button
+            android:id="@+id/selectImage"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_marginBottom="823dp"
+            android:gravity="center"
+            android:text="Select Image" />
+
     </LinearLayout>
 </RelativeLayout>

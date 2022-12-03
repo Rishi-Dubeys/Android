@@ -101,7 +101,7 @@ public class homeFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
                 if (!editable.toString().isEmpty()){
-                    search(editable.toString());
+                    search(editable.toString().toLowerCase());
                 }
                 else {
                     search("");
@@ -154,20 +154,23 @@ public class homeFragment extends Fragment {
     // Search Bar Tutorial
     // https://www.youtube.com/watch?v=alJnPh4IZNo
     public void search(String s){
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
+        ArrayList<newGames> filteredList =  new ArrayList<>();
 
-        Query query = dbRef.orderByChild("name").startAt(s).endAt(s + "u\uf8ff");
-        query.addValueEventListener(new ValueEventListener() {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("News");
+        dbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()){
                     NewGamesList.clear();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         final newGames newGames = dataSnapshot.getValue(newGames.class);
-                        NewGamesList.add(newGames);
+                        if(newGames.getName().toLowerCase().contains(s.toString().toLowerCase())){
+                            filteredList.add(newGames);
+
+                        }
                     }
                 }
-                newGamesView adapter = new newGamesView(getContext(), NewGamesList);
+                newGamesView adapter = new newGamesView(getContext(), filteredList);
                 // setting the adapter to the recycler view
                 recyclerView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

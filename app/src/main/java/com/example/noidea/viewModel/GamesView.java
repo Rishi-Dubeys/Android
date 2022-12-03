@@ -48,13 +48,20 @@ public class GamesView extends RecyclerView.Adapter<GamesView.ViewHolder> {
         String gameDate = games.getReleaseDate();
         holder.date.setText(gameDate);
 
+        String gamePublisher = games.getPublisher();
+        holder.publisher.setText(gamePublisher);
+
+        String gamePlatform = games.getPlatform();
+        holder.platform.setText(gamePlatform);
+
+        String game_id = games.getId();
+
         String itemUrl = games.getUrl();
         Glide.with(context).load(itemUrl).into(holder.imageView);
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, gameDetailsActivity.class);
-            intent.putExtra("id",GamesList.get(position).getGame_id());
-            intent.putExtra("name",GamesList.get(position).getName());
+            intent.putExtra("id",game_id);
             context.startActivity(intent);
         });
 
@@ -68,14 +75,16 @@ public class GamesView extends RecyclerView.Adapter<GamesView.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView name;
-        public TextView date;
+        public TextView name , date , publisher , platform;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             this.imageView = itemView.findViewById(R.id.itemGameImage);
             this.name = itemView.findViewById(R.id.itemGameName);
             this.date = itemView.findViewById(R.id.itemGameDate);
+            this.publisher = itemView.findViewById(R.id.itemGamePublisher);
+            this.platform = itemView.findViewById(R.id.itemGamePlatform);
 
         }
     }

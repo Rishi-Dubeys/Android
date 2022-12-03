@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.example.noidea.AddNewsActivity;
 import com.example.noidea.R;
+import com.example.noidea.addGamesActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,6 +70,9 @@ public class reviewsFragment extends Fragment {
 
         Button adminPage = view.findViewById(R.id.adminPage);
         adminPage.setOnClickListener(view1 -> startActivity(new Intent(getContext(), AddNewsActivity.class)));
+
+        Button adminPage2 = view.findViewById(R.id.adminPage2);
+        adminPage2.setOnClickListener(view1 -> startActivity(new Intent(getContext(), addGamesActivity.class)));
 
 
         return view;

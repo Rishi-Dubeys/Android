@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -47,6 +48,9 @@ public class AddNewsActivity extends AppCompatActivity implements DatePickerDial
 
         TextView add_games_btn = findViewById(R.id.add_game_btn);
         add_games_btn.setOnClickListener(view -> upload_image());
+
+        Button loadImage = findViewById(R.id.loadImage);
+        loadImage.setOnClickListener(view -> imageChooser());
 
         imageView = findViewById(R.id.press_img);
         imageView.setOnClickListener(view -> imageChooser());

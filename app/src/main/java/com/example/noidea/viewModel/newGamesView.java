@@ -44,6 +44,8 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
         String gameDate = newGames.getReleaseDate();
         holder.date.setText(gameDate);
 
+
+
         String itemUrl = newGames.getUrl();
         Glide.with(context).load(itemUrl).into(holder.imageView);
     }
@@ -55,13 +57,12 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView imageView;
-        public TextView name;
-        public TextView date;
+        public TextView name , date;
         ViewHolder(View itemView) {
             super(itemView);
-            this.imageView = (ImageView) itemView.findViewById(R.id.itemImage);
-            this.name = (TextView) itemView.findViewById(R.id.itemName);
-            this.date = (TextView) itemView.findViewById(R.id.itemDate);
+            this.imageView = itemView.findViewById(R.id.itemImage);
+            this.name = itemView.findViewById(R.id.itemName);
+            this.date = itemView.findViewById(R.id.itemDate);
         }
     }
 }

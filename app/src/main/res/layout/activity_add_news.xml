@@ -18,7 +18,7 @@
             android:layout_height="41dp"
             android:layout_marginBottom="823dp"
             android:gravity="center"
-            android:text="@string/load_image" />
+            android:text="Select Image" />
 
     </LinearLayout>
 
@@ -30,9 +30,6 @@
         android:gravity="center"
         android:paddingLeft="60dp"
         android:paddingRight="60dp">
-
-
-
 
 
         <LinearLayout

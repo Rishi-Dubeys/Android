@@ -9,16 +9,29 @@ public class Games {
     String publisher;
     String Description;
     String url;
-    String game_id;
 
 
-    public String getGame_id() {
-        return game_id;
+
+    String id;
+
+    public Games() {
+
+    };
+
+    public Games(String str_name, String str_platform, String str_date, String key, String url, String str_publisher, String str_description) {
+        this.name = str_name;
+        this.platform = str_platform;
+        this.releaseDate = str_date;
+        this.id = key;
+        this.url = url;
+        this.publisher = str_publisher;
+        this.Description = str_description;
     }
 
-    public void setGame_id(String game_id) {
-        this.game_id = game_id;
-    }
+
+    public String getId() {return id;}
+
+    public void setId(String id) {this.id = id;}
 
     public String getName() { return name; }
 
