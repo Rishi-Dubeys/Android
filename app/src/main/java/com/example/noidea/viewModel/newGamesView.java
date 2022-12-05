@@ -44,11 +44,10 @@ public class newGamesView extends RecyclerView.Adapter<newGamesView.ViewHolder> 
         String gameDate = newGames.getReleaseDate();
         holder.date.setText(gameDate);
 
-
-
         String itemUrl = newGames.getUrl();
         Glide.with(context).load(itemUrl).into(holder.imageView);
     }
+
 
     @Override
     public int getItemCount() {

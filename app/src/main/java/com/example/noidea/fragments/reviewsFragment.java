@@ -1,18 +1,38 @@
 package com.example.noidea.fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.noidea.AddNewsActivity;
+import com.example.noidea.LoginActivity;
+import com.example.noidea.MainActivity;
 import com.example.noidea.R;
+import com.example.noidea.ReviewsActivity;
 import com.example.noidea.addGamesActivity;
+import com.example.noidea.model.Review;
+import com.example.noidea.viewModel.reviewsView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +81,10 @@ public class reviewsFragment extends Fragment {
         }
     }
 
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    List<Review> reviewList = new ArrayList<>();
+    RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,13 +92,51 @@ public class reviewsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reviews, container, false);
 
 
-        Button adminPage = view.findViewById(R.id.adminPage);
-        adminPage.setOnClickListener(view1 -> startActivity(new Intent(getContext(), AddNewsActivity.class)));
+        recyclerView = view.findViewById(R.id.recyclerReview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        reviewList.clear();
 
-        Button adminPage2 = view.findViewById(R.id.adminPage2);
-        adminPage2.setOnClickListener(view1 -> startActivity(new Intent(getContext(), addGamesActivity.class)));
-
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            retrieveData();
+        } else {
+            startActivity(new Intent(getContext(), LoginActivity.class));
+        }
 
         return view;
+    }
+
+    private void retrieveData() {
+
+        String userid = mAuth.getCurrentUser().getUid();
+
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference("Reviews-User").child(userid);
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Review review = dataSnapshot.getValue(Review.class);
+                    reviewList.add(review);
+                }
+                // Use model to retrieve the data from Firebase Database
+
+
+                // Assigning the View Adapter/Model to retrieve the list populated above
+                reviewsView adapter = new reviewsView(getContext(), reviewList);
+                // setting the adapter to the recycler view
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+            }
+        };
+        dbRef.addValueEventListener(postListener);
+
+
     }
 }
